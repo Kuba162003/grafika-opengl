@@ -34,6 +34,7 @@ Place, Fifth Floor, Boston, MA  02110 - 1301  USA
 GLuint tlo;
 GLuint podloga;
 GLuint sufit;
+GLuint cyfry[10];
 
 //Teksturowanie
 GLuint ReadTexture(const char* filename) {
@@ -69,6 +70,18 @@ void initOpenGLProgram(GLFWwindow* window) {
 	tlo = ReadTexture("tlo.png");
 	podloga = ReadTexture("podloga.png");
 	sufit = ReadTexture("sufit.png");
+	cyfry[0] = ReadTexture("0.png");
+	cyfry[1] = ReadTexture("1.png");
+	cyfry[2] = ReadTexture("2.png");
+	cyfry[3] = ReadTexture("3.png");
+	cyfry[4] = ReadTexture("4.png");
+	cyfry[5] = ReadTexture("5.png");
+	cyfry[6] = ReadTexture("6.png");
+	cyfry[7] = ReadTexture("7.png");
+	cyfry[8] = ReadTexture("8.png");
+	cyfry[9] = ReadTexture("9.png");
+
+
 	//************Tutaj umieszczaj kod, który należy wykonać raz, na początku programu************	
 }
 
@@ -79,12 +92,22 @@ void freeOpenGLProgram(GLFWwindow* window) {
 	glDeleteTextures(1, &tlo);
 	glDeleteTextures(1, &podloga);
 	glDeleteTextures(1, &sufit);
+	for (int i = 0; i <= 9; i++) {
+		glDeleteTextures(1, &cyfry[i]);
+	}
     //************Tutaj umieszczaj kod, który należy wykonać po zakończeniu pętli głównej************	
 }
 
 float speed = 0;
 float speed2 = 0;
 float butterflyAngle = 0.0f;
+float butterflyY = 0.0f;
+float butterflyYTarget = 0.0f;
+float butterflyYSpeed = 0.003f;
+int laps_j = 0;
+int laps_d = 0;
+int laps_s = 0;
+float lastButterflyAngle = 0.0f;
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, -5.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, 1.0f); // patrzy "do przodu" wzdłuż +Z
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -156,10 +179,13 @@ void drawScene(GLFWwindow* window, float angle, float angle2) {
 	glClearColor(0.2f, 0.4, 0.8f, 0.4f);
 
 	//ruch motyla
+	lastButterflyAngle = butterflyAngle;
 	butterflyAngle += 0.01f; // Im mniejsza wartość, tym wolniejszy ruch
-	if (butterflyAngle > 2 * 3.14159f) butterflyAngle -= 2 * 3.14159f;
 
-	
+	if (butterflyAngle > 2 * 3.14159f) {
+		butterflyAngle -= 2 * 3.14159f;
+	}
+
 	//ruch kamery
 	glm::mat4 V = glm::lookAt(
 		cameraPos,
@@ -192,16 +218,62 @@ void drawScene(GLFWwindow* window, float angle, float angle2) {
 	float radius = 0.8f;
 	float x = radius * cos(butterflyAngle);
 	float z = radius * sin(butterflyAngle);
-	M = glm::translate(M, glm::vec3(x, 0.0f, z));
 
-	// Opcjonalnie: obrót tak, by motyl "patrzył" w kierunku ruchu
+	//losowy ruch motyla
+	// Co jakiś czas zmień docelową wysokość motyla
+	if (rand() % 100 < 2) { // 2% szansy na zmianę w każdym wywołaniu
+		butterflyYTarget = ((float)(rand() % 100) / 100.0f - 0.5f) * 2.0f; // -1 do 1
+	}
+	// Powolne zbliżanie się do celu wysokości
+	if (butterflyY < butterflyYTarget)
+		butterflyY += butterflyYSpeed;
+	else
+		butterflyY -= butterflyYSpeed;
+
+	M = glm::translate(M, glm::vec3(x, butterflyY - 0.4f, z));
+	// Obrót tak, by motyl "patrzył" w kierunku ruchu
 	M = glm::rotate(M, -butterflyAngle, glm::vec3(0.0f, 1.0f, 0.0f));
 
 	M = glm::scale(M, glm::vec3(0.03f, 0.03f, 0.03f));
 
 	glUniformMatrix4fv(spLambert->u("M"), 1, false, glm::value_ptr(M));
-	glUniform4f(spLambert->u("color"), 1.0, 0.5, 0.0, 1);
+	glUniform4f(spLambert->u("color"), 0.56, 0.37, 0.14, 1);
 	ModelResources::motyl.drawSolid();
+
+	//skrzydla
+	float wingFlapAngle = 0.5f * sin(butterflyAngle * 20.0f); // szybkie kołysanie skrzydeł
+
+	glm::mat4 M12 = glm::mat4(1.0f);
+	M12 = glm::translate(M, glm::vec3(0.0f, 0.0f, 0.0f));
+	M12 = glm::scale(M, glm::vec3(0.0f, 0.0f, 0.0f));
+	M12 = glm::rotate(M, wingFlapAngle, glm::vec3(0.0f, 1.0f, 0.0f));
+	glUniformMatrix4fv(spLambert->u("M"), 1, false, glm::value_ptr(M12));
+	glUniform4f(spLambert->u("color"), 1.0, 0.0, 0.0, 1);
+	ModelResources::lewe_skrzydlo.drawSolid();
+
+	glm::mat4 M13 = glm::mat4(1.0f);
+	M13 = glm::translate(M, glm::vec3(0.0f, 0.0f, 0.0f));
+	M13 = glm::scale(M, glm::vec3(0.0f, 0.0f, 0.0f));
+	M13 = glm::rotate(M, -wingFlapAngle, glm::vec3(0.0f, 1.0f, 0.0f));
+	glUniformMatrix4fv(spLambert->u("M"), 1, false, glm::value_ptr(M13));
+	glUniform4f(spLambert->u("color"), 1.0, 0.0, 0.0, 1);
+	ModelResources::prawe_skrzydlo.drawSolid();
+
+	glm::mat4 M14 = glm::mat4(1.0f);
+	M14 = glm::translate(M, glm::vec3(0.0f, 0.0f, 0.0f));
+	M14 = glm::scale(M, glm::vec3(0.0f, 0.0f, 0.0f));
+	M14 = glm::rotate(M, 0.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	glUniformMatrix4fv(spLambert->u("M"), 1, false, glm::value_ptr(M14));
+	glUniform4f(spLambert->u("color"), 1.0, 0.0, 0.0, 1);
+	ModelResources::lewe_male.drawSolid();
+
+	glm::mat4 M15 = glm::mat4(1.0f);
+	M15 = glm::translate(M, glm::vec3(0.0f, 0.0f, 0.0f));
+	M15 = glm::scale(M, glm::vec3(0.0f, 0.0f, 0.0f));
+	M15 = glm::rotate(M, 0.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	glUniformMatrix4fv(spLambert->u("M"), 1, false, glm::value_ptr(M15));
+	glUniform4f(spLambert->u("color"), 1.0, 0.0, 0.0, 1);
+	ModelResources::prawe_male.drawSolid();
 
 	//kwiatki
 	//lodygi
@@ -317,6 +389,49 @@ void drawScene(GLFWwindow* window, float angle, float angle2) {
 	LoadTexture(P, V, M5, tlo);
 	glUniformMatrix4fv(spLambert->u("M"), 1, false, glm::value_ptr(M5));
 	Models::cube.drawSolid();
+
+	//licznik okrazen
+	//setki
+	glm::mat4 M6 = glm::mat4(1.0f);
+	M6 = glm::translate(M6, glm::vec3(-1.0f, 1.0f, -1.0f));
+	M6 = glm::rotate(M6, 3.14f / 2.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+	M6 = glm::scale(M6, glm::vec3(0.07f, 0.01f, 0.2f));
+	LoadTexture(P, V, M6, cyfry[laps_s]);
+	glUniformMatrix4fv(spLambert->u("M"), 1, false, glm::value_ptr(M6));
+	Models::cube.drawSolid();
+
+	//dziesiatki
+	glm::mat4 M7 = glm::mat4(1.0f);
+	M7 = glm::translate(M7, glm::vec3(-1.15f, 1.0f, -1.0f));
+	M7 = glm::rotate(M7, 3.14f / 2.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+	M7 = glm::scale(M7, glm::vec3(0.07f, 0.01f, 0.2f));
+	LoadTexture(P, V, M7, cyfry[laps_d]);
+	glUniformMatrix4fv(spLambert->u("M"), 1, false, glm::value_ptr(M7));
+	Models::cube.drawSolid();
+
+	//jednostki
+	glm::mat4 M8 = glm::mat4(1.0f);
+	M8 = glm::translate(M8, glm::vec3(-1.30f, 1.0f, -1.0f));
+	M8 = glm::rotate(M8, 3.14f / 2.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+	M8 = glm::scale(M8, glm::vec3(0.07f, 0.01f, 0.2f));
+	LoadTexture(P, V, M8, cyfry[laps_j]);
+	glUniformMatrix4fv(spLambert->u("M"), 1, false, glm::value_ptr(M8));
+	Models::cube.drawSolid();
+
+	if (lastButterflyAngle > butterflyAngle) {
+		laps_j++;
+		if (laps_j == 10) {
+			laps_j = 0;
+			laps_d++;
+		}
+		if (laps_d == 10) {
+			laps_d = 0;
+			laps_s++;
+		}
+		if (laps_s == 10) {
+			laps_s = 0;
+		}
+	}
 
 	glfwSwapBuffers(window);
 	

@@ -1,15 +1,18 @@
 ﻿  main_file.cpp
-C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(110,34): warning C4305: "=": obcięcie z "double" do "float"
-C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(111,35): warning C4305: "=": obcięcie z "double" do "float"
-C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(156,21): warning C4305: "argument": obcięcie z "double" do "GLclampf"
-C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(238,42): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(246,42): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(254,42): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(263,42): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(271,47): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(271,42): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(279,47): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(279,37): warning C4305: "argument": obcięcie z "double" do "GLfloat"
-C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(364,18): warning C4244: "+=": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(365,20): warning C4244: "+=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(133,34): warning C4305: "=": obcięcie z "double" do "float"
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(134,35): warning C4305: "=": obcięcie z "double" do "float"
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(179,21): warning C4305: "argument": obcięcie z "double" do "GLclampf"
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(240,49): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(240,43): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(240,37): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(310,42): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(318,42): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(326,42): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(335,42): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(343,47): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(343,42): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(351,47): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(351,37): warning C4305: "argument": obcięcie z "double" do "GLfloat"
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(479,18): warning C4244: "+=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\main_file.cpp(480,20): warning C4244: "+=": konwersja z "double" do "float", możliwa utrata danych
   g3d_st_01_win.vcxproj -> C:\Users\Pedzi\OneDrive\Pulpit\Grafika_3D\g3d_st_01_win\g3d_st_01_win\x64\Debug\g3d_st_01_win.exe

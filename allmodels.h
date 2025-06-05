@@ -34,6 +34,10 @@ public:
     static Models::ObjModel lodyga;
     static Models::ObjModel zalaznia;
     static Models::ObjModel platki;
+    static Models::ObjModel lewe_skrzydlo;
+    static Models::ObjModel prawe_skrzydlo;
+    static Models::ObjModel lewe_male;
+    static Models::ObjModel prawe_male;
 };
 
 void loadModels();   // Funkcja inicjalizująca wszystkie modele
